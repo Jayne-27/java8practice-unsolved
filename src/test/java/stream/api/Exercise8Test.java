@@ -4,9 +4,6 @@ import common.test.tool.annotation.Difficult;
 import common.test.tool.dataset.ClassicOnlineStore;
 import common.test.tool.entity.Customer;
 import common.test.tool.entity.Item;
-import common.test.tool.entity.Shop;
-
-
 import org.junit.Test;
 
 import java.util.List;
