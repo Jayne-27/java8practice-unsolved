@@ -6,7 +6,6 @@ import common.test.tool.entity.OnlineShoppingMall;
 import common.test.tool.entity.Shop;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ClassicOnlineStore {

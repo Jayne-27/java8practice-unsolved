@@ -9,9 +9,9 @@ import org.junit.Test;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
 public class Exercise3Test extends ClassicOnlineStore {
@@ -24,7 +24,7 @@ public class Exercise3Test extends ClassicOnlineStore {
         /**
          * Count how many items there are in {@link Customer.wantToBuy} using {@link Stream#count}
          */
-        long sum = -1;
+        long sum = customerList.stream().mapToLong(c -> c.getWantToBuy().size()).sum();
 
 
         assertThat(sum, is(32L));
@@ -39,11 +39,11 @@ public class Exercise3Test extends ClassicOnlineStore {
          * Find the richest customer's budget by using {@link Stream#max} and {@link Comparator#naturalOrder}
          * Don't use {@link Stream#sorted}
          */
-        Comparator<Integer> comparator = null;
-        Optional<Integer> richestCustomer = null;
+        Comparator<Integer> comparator = Comparator.naturalOrder();
+        Optional<Integer> richestCustomer = customerList.stream().map(Customer::getBudget).max(comparator);
 
         assertThat(comparator.getClass().getSimpleName(), is("NaturalOrderComparator"));
-        assertThat(richestCustomer.get(), is(12000));
+        assertEquals(12000, (int) richestCustomer.get());
     }
 
     @Easy
@@ -55,9 +55,9 @@ public class Exercise3Test extends ClassicOnlineStore {
          * Find the youngest customer by using {@link Stream#min}
          * Don't use {@link Stream#sorted}
          */
-        Comparator<Customer> comparator = null;
-        Optional<Customer> youngestCustomer = null;
+        Comparator<Customer> comparator = Comparator.comparing(Customer::getAge);
+        Optional<Customer> youngestCustomer = customerList.stream().min(comparator);
 
-        assertThat(youngestCustomer.get(), is(customerList.get(8)));
+        assertEquals(customerList.get(8), youngestCustomer.get());
     }
 }
